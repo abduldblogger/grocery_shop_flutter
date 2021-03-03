@@ -1,10 +1,9 @@
-import 'package:rxdart/rxdart.dart';
-import 'package:grocery_shop_flutter/models/Product.dart';
-import 'package:grocery_shop_flutter/models/Order.dart';
 import 'package:grocery_shop_flutter/models/Cart.dart';
+import 'package:grocery_shop_flutter/models/Order.dart';
+import 'package:grocery_shop_flutter/models/Product.dart';
+import 'package:rxdart/rxdart.dart';
 
-class CartBloc{
-
+class CartBloc {
   static int _orderId = 0;
   static CartBloc _cartBloc;
   Cart _currentCart;
@@ -13,16 +12,15 @@ class CartBloc{
   PublishSubject<Order> _publishSubjectOrder;
 
   factory CartBloc(){
-    if(_cartBloc == null)
-      _cartBloc = new CartBloc._();
+    if (_cartBloc == null) _cartBloc = CartBloc._();
 
     return _cartBloc;
   }
 
-  CartBloc._(){
-    _currentCart = new Cart();
-    _publishSubjectCart = new PublishSubject<Cart>();
-    _publishSubjectOrder = new PublishSubject<Order>();
+  CartBloc._() {
+    _currentCart = Cart();
+    _publishSubjectCart = PublishSubject<Cart>();
+    _publishSubjectOrder = PublishSubject<Order>();
   }
 
   Observable<Cart> get observableCart => _publishSubjectCart.stream;
@@ -37,7 +35,7 @@ class CartBloc{
   }
 
   void addOrderToCart(Product product, int quantity){
-    _lastOrder = new Order(product, quantity, _orderId++);
+    _lastOrder = Order(product, quantity, _orderId++);
     _currentCart.addOrder(_lastOrder);
     _updateLastOrder();
     _updateCart();
