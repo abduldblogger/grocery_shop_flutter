@@ -43,6 +43,7 @@ class MinimalCart extends StatelessWidget {
   }
   
   void _fillList(Cart cart, BuildContext context){
+    _listWidget.clear();
     _listWidget.add(Text("Cart",
         style: TextStyle(
             color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)));
